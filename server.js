@@ -61,6 +61,7 @@ app.use('/api/orders', require('./routes/orderRoutes'));
 app.use('/api/contact', require('./routes/contactRoutes'));
 app.use('/api/projects', require('./routes/projectRoutes'));
 app.use('/api/chat', require('./routes/chatRoutes'));
+app.use('/api/fluxwave', require('./routes/fluxWaveRoutes'));
 
 // Root Route
 app.get('/', (req, res) => {
