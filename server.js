@@ -29,7 +29,8 @@ const allowedOrigins = [
     
     // Local Development
     'http://localhost:5173',
-    'http://localhost:3000'
+    'http://localhost:3000',
+     'http://localhost:5000'
 ];
 
 app.use(cors({
@@ -48,7 +49,7 @@ app.use(cors({
     },
     credentials: true,
     methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH', 'OPTIONS'],
-    allowedHeaders: ['Content-Type', 'Authorization', 'X-Requested-With']
+    allowedHeaders: ['Content-Type', 'Authorization', 'X-Requested-With', 'x-fluxwave-key']
 }));
 
 app.use(express.json());

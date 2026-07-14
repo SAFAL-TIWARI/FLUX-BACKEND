@@ -2,10 +2,55 @@ const express = require("express");
 const router = express.Router();
 
 const {
-    registerParticipant
+  registerParticipant,
+  getDomains,
+  getRegistrationCount,
+  getAllRegistrations,
+  submitIdea,
+  submitFinal,
+  updateStatus,
+  checkIn,
 } = require("../controllers/fluxWaveController");
 
+// Admin-only actions (evaluate, check-in, list all) are protected here.
+const { protect, admin } = require("../middleware/authMiddleware");
+
+// Temporary key-gated event admin (no login) — remove after FluxWave 2.0 ends
+const eventAdminAuth = require("../middleware/eventAdminAuth");
+
+// ---- Round 0: Registration (Jul 11-20) ----
 // POST /api/fluxwave/register
 router.post("/register", registerParticipant);
+
+// GET /api/fluxwave/domains -> list of valid domains
+router.get("/domains", getDomains);
+
+// GET /api/fluxwave/count -> live count of registered teams
+router.get("/count", getRegistrationCount);
+
+// ---- Round 1: Idea & PPT submission (Jul 20-28) ----
+// PUT /api/fluxwave/submit-idea
+router.put("/submit-idea", submitIdea);
+
+// ---- Round 2: Final project submission at the Grand Finale (Aug 1) ----
+// PUT /api/fluxwave/submit-final
+router.put("/submit-final", submitFinal);
+
+// ---- Evaluation (Jul 29-31) — admin only ----
+// PATCH /api/fluxwave/:id/status -> shortlist / reject / mark finalist
+router.patch("/:id/status", protect, admin, updateStatus);
+
+// ---- Grand Finale check-in (Aug 1) — admin only ----
+// PATCH /api/fluxwave/:id/checkin -> mark a finalist team as checked in at KSH
+router.patch("/:id/checkin", protect, admin, checkIn);
+
+// GET /api/fluxwave/registrations -> all registrations — admin only
+router.get("/registrations", protect, admin, getAllRegistrations);
+
+// ---- TEMPORARY: key-gated event admin, no login required ----
+// Delete this whole block once FluxWave 2.0 wraps up.
+router.get("/public-admin/registrations", eventAdminAuth, getAllRegistrations);
+router.patch("/public-admin/:id/status", eventAdminAuth, updateStatus);
+router.patch("/public-admin/:id/checkin", eventAdminAuth, checkIn);
 
 module.exports = router;
