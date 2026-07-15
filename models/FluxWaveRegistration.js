@@ -10,7 +10,7 @@ const DOMAINS = [
 ];
 
 // Branch codes as used in the college's enrollment numbering scheme
-const BRANCHES = ["EC", "AI", "CS", "IT", "BC", "EE", "ME"];
+// const BRANCHES = ["EC", "AI", "CS", "IT", "BC", "EE", "ME"];
 
 // Only the college domain is allowed to register
 const collegeEmailRegex = /^[a-zA-Z0-9._%+-]+@satiengg\.in$/;
@@ -54,7 +54,6 @@ const fluxWaveRegistrationSchema = new mongoose.Schema(
     },
     domain: {
       type: String,
-      required: [true, "Please select a domain"],
       enum: {
         values: DOMAINS,
         message: "'{VALUE}' is not a valid domain",
@@ -87,23 +86,23 @@ const fluxWaveRegistrationSchema = new mongoose.Schema(
       uppercase: true,
       unique: true,
     },
-    college: {
-      type: String,
-      required: [true, "College name is required"],
-      trim: true,
-      default: "Samrat Ashok Technological Institute (SATI), Vidisha",
-    },
-    branch: {
-      type: String,
-      trim: true,
-    },
-    year: {
-      type: String,
-      enum: {
-        values: ["1st Year", "2nd Year", "3rd Year", "4th Year"],
-        message: "'{VALUE}' is not a valid year",
-      },
-    },
+    // college: {
+    //   type: String,
+    //   required: [true, "College name is required"],
+    //   trim: true,
+    //   default: "Samrat Ashok Technological Institute (SATI), Vidisha",
+    // },
+    // branch: {
+    //   type: String,
+    //   trim: true,
+    // },
+    // year: {
+    //   type: String,
+    //   enum: {
+    //     values: ["1st Year", "2nd Year", "3rd Year", "4th Year"],
+    //     message: "'{VALUE}' is not a valid year",
+    //   },
+    // },
     teamMembers: {
       type: [teamMemberSchema],
       default: [],
@@ -180,7 +179,7 @@ const fluxWaveRegistrationSchema = new mongoose.Schema(
 // schema.index() separately for them (that caused a duplicate-index warning).
 
 fluxWaveRegistrationSchema.statics.DOMAINS = DOMAINS;
-fluxWaveRegistrationSchema.statics.BRANCHES = BRANCHES;
+// fluxWaveRegistrationSchema.statics.BRANCHES = BRANCHES;
 
 // ---------------------------------------------------------------------
 // TEMPORARY DIAGNOSTIC — remove once you've confirmed the right file

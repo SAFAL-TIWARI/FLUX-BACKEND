@@ -15,14 +15,13 @@ const registerParticipant = async (req, res) => {
   try {
     const {
       teamName,
-      domain,
       leaderName,
       leaderEmail,
       contactNumber,
       enrollment,
-      college,
-      branch,
-      year,
+      // college,
+      // branch,
+      // year,
       teamMembers,
       ideaTitle,
       problemStatement,
@@ -32,7 +31,6 @@ const registerParticipant = async (req, res) => {
     // clear message instead of a raw Mongoose error for the common case.
     const requiredFields = {
       teamName,
-      domain,
       leaderName,
       leaderEmail,
       contactNumber,
@@ -110,14 +108,13 @@ const registerParticipant = async (req, res) => {
 
     const registration = await FluxWaveRegistration.create({
       teamName,
-      domain,
       leaderName,
       leaderEmail,
       contactNumber,
       enrollment,
-      college,
-      branch,
-      year,
+      // college,
+      // branch,
+      // year,
       teamMembers,
       ideaTitle,
       problemStatement,
@@ -203,7 +200,7 @@ const getAllRegistrations = async (req, res) => {
  */
 const submitIdea = async (req, res) => {
   try {
-    const { teamName, leaderEmail, ideaTitle, problemStatement, pptLink } = req.body;
+    const { teamName, leaderEmail, domain, ideaTitle, problemStatement, pptLink } = req.body;
 
     if (!teamName || !leaderEmail) {
       return res.status(400).json({
@@ -237,6 +234,7 @@ const submitIdea = async (req, res) => {
       });
     }
 
+    if (domain) team.domain = domain;
     team.ideaTitle = ideaTitle || team.ideaTitle;
     team.problemStatement = problemStatement || team.problemStatement;
     team.pptLink = pptLink;
