@@ -40,8 +40,8 @@ app.use(cors({
         // 1. Allow internal requests (mobile apps, Postman, server-to-server)
         if (!origin) return callback(null, true);
 
-        // 2. Check if the incoming origin matches our allowed list
-        if (allowedOrigins.includes(origin)) {
+        // 2. Check if the incoming origin matches our allowed list or local dev
+        if (allowedOrigins.includes(origin) || origin.startsWith('http://localhost:') || origin.startsWith('http://127.0.0.1:')) {
             callback(null, true);
         } else {
             // Log the blocked origin for debugging in Vercel logs
