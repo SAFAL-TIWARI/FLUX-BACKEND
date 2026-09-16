@@ -31,7 +31,8 @@ const allowedOrigins = [
     
     // Local Development
     'http://localhost:5173',
-    'http://localhost:3000'
+    'http://localhost:3000',
+     'http://localhost:5000'
 ];
 
 app.use(cors({
@@ -39,8 +40,8 @@ app.use(cors({
         // 1. Allow internal requests (mobile apps, Postman, server-to-server)
         if (!origin) return callback(null, true);
 
-        // 2. Check if the incoming origin matches our allowed list or deployment platforms
-        if (allowedOrigins.includes(origin) || origin.endsWith('.vercel.app') || origin.endsWith('.netlify.app')) {
+        // 2. Check if the incoming origin matches our allowed list
+        if (allowedOrigins.includes(origin)) {
             callback(null, true);
         } else {
             // Log the blocked origin for debugging in Vercel logs
@@ -64,6 +65,8 @@ app.use('/api/contact', require('./routes/contactRoutes'));
 app.use('/api/projects', require('./routes/projectRoutes'));
 app.use('/api/chat', require('./routes/chatRoutes'));
 app.use('/api/fluxwave', require('./routes/fluxWaveRoutes'));
+// With other app.use() route registrations:
+app.use('/api/faq', faqRoutes);
 app.use('/api/recruitment', require('./routes/recruitmentRoutes'));
 
 // Root Route
