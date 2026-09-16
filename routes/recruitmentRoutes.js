@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const { protect, admin } = require('../middleware/authMiddleware');
+const recruitmentAdminAuth = require('../middleware/recruitmentAdminAuth');
 const {
   registerCandidate,
   getRecruitmentStatus,
@@ -15,14 +15,18 @@ router.post('/register', registerCandidate);
 // GET /api/recruitment/status
 router.get('/status', getRecruitmentStatus);
 
-// GET /api/recruitment/registrations (Admin & Event Organizer portal)
-router.get('/registrations', getAllRecruitmentRegistrations);
+// POST /api/recruitment/verify-key (Key validation for admin portal)
+router.post('/verify-key', recruitmentAdminAuth, (req, res) => {
+  res.json({ success: true, message: 'Recruitment admin key verified successfully.' });
+});
 
-// PATCH /api/recruitment/status/:id
-router.patch('/status/:id', updateRecruitmentStatus);
+// GET /api/recruitment/registrations (Admin & Event Organizer portal - Protected by key)
+router.get('/registrations', recruitmentAdminAuth, getAllRecruitmentRegistrations);
 
-// DELETE /api/recruitment/registrations/:id
-router.delete('/registrations/:id', deleteRecruitmentRegistration);
+// PATCH /api/recruitment/status/:id (Protected by key)
+router.patch('/status/:id', recruitmentAdminAuth, updateRecruitmentStatus);
+
+// DELETE /api/recruitment/registrations/:id (Protected by key)
+router.delete('/registrations/:id', recruitmentAdminAuth, deleteRecruitmentRegistration);
 
 module.exports = router;
-

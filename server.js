@@ -5,6 +5,8 @@ const http = require('http');
 const connectDB = require('./config/db');
 const { socketHandler } = require('./socket/socketHandler');
 const { notFound, errorHandler } = require('./middleware/errorMiddleware');
+// At the top with other require() statements:
+const faqRoutes = require('./routes/faqRoutes');
 
 // 1. Load Environment & Connect Database
 dotenv.config();
@@ -48,7 +50,7 @@ app.use(cors({
     },
     credentials: true,
     methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH', 'OPTIONS'],
-    allowedHeaders: ['Content-Type', 'Authorization', 'X-Requested-With']
+    allowedHeaders: ['Content-Type', 'Authorization', 'X-Requested-With', 'x-fluxwave-key', 'x-recruitment-key']
 }));
 
 app.use(express.json());

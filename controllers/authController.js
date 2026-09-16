@@ -34,12 +34,21 @@ const registerUser = asyncHandler(async (req, res, next) => {
 const authUser = asyncHandler(async (req, res, next) => {
   const { email, password } = req.body;
 
-  // --- 1. STATIC ADMIN CHECK ---
-  if (email === "fluxadmin@mail.com" && password === "Flux*admin") {
+  // --- 1. ADMIN CHECK FROM ENVIRONMENT (.env) ---
+  const envAdminEmail = (process.env.FLUX_ADMIN_EMAIL).trim().toLowerCase();
+  const envAdminPassword = process.env.FLUX_ADMIN_PASSWORD ;
+  const envAdminName = process.env.FLUX_ADMIN_NAME ;
+
+  if (
+    email &&
+    password &&
+    (email.trim().toLowerCase() === envAdminEmail ) &&
+    password === envAdminPassword
+  ) {
     return res.json({
       _id: "STATIC_ADMIN_ID",
-      name: "Flux Administrator",
-      email: "fluxadmin@mail.com",
+      name: envAdminName,
+      email: envAdminEmail,
       role: "admin",
       token: generateToken("STATIC_ADMIN_ID"),
     });
