@@ -37,6 +37,7 @@ const registerCandidate = asyncHandler(async (req, res) => {
     whatKnowAboutClub,
     fluxEventsAttended,
     otherEventsAttended,
+    expectationsFromClub,
   } = req.body;
 
   // 1. Mandatory Validations
@@ -119,6 +120,7 @@ const registerCandidate = asyncHandler(async (req, res) => {
     whatKnowAboutClub: whatKnowAboutClub ? whatKnowAboutClub.trim() : '',
     fluxEventsAttended: fluxEventsAttended ? fluxEventsAttended.trim() : '',
     otherEventsAttended: otherEventsAttended ? otherEventsAttended.trim() : '',
+    expectationsFromClub: expectationsFromClub ? expectationsFromClub.trim() : '',
     ticketId,
   });
 
