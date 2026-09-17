@@ -152,7 +152,12 @@ const recruitmentRegistrationSchema = new mongoose.Schema(
       trim: true,
       default: '',
     },
-    otherEventsAttended: {
+        otherEventsAttended: {
+      type: String,
+      trim: true,
+      default: '',
+    },
+    expectationsFromClub: {
       type: String,
       trim: true,
       default: '',
