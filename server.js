@@ -51,7 +51,7 @@ app.use(cors({
     },
     credentials: true,
     methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH', 'OPTIONS'],
-    allowedHeaders: ['Content-Type', 'Authorization', 'X-Requested-With', 'x-fluxwave-key', 'x-recruitment-key']
+    allowedHeaders: ['Content-Type', 'Authorization', 'X-Requested-With', 'x-fluxwave-key', 'x-recruitment-key', 'x-technovision-key']
 }));
 
 app.use(express.json());
@@ -68,6 +68,7 @@ app.use('/api/fluxwave', require('./routes/fluxWaveRoutes'));
 // With other app.use() route registrations:
 app.use('/api/faq', faqRoutes);
 app.use('/api/recruitment', require('./routes/recruitmentRoutes'));
+app.use('/api/technovision-nov', require('./routes/technovisionNovRoutes'));
 
 // Root Route
 app.get('/', (req, res) => {
