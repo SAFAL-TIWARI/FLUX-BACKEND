@@ -28,6 +28,7 @@ const allowedOrigins = [
     // Deployment Platforms
     'https://clubflux.netlify.app',
     'https://clubflux.vercel.app',
+    'https://fluxsati.vercel.app',
     
     // Local Development
     'http://localhost:5173',
