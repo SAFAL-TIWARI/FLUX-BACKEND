@@ -68,7 +68,6 @@ app.use('/api/fluxwave', require('./routes/fluxWaveRoutes'));
 // With other app.use() route registrations:
 app.use('/api/faq', faqRoutes);
 app.use('/api/recruitment', require('./routes/recruitmentRoutes'));
-app.use('/api/technovision', require('./routes/technovisionRoutes'));
 
 // Root Route
 app.get('/', (req, res) => {
