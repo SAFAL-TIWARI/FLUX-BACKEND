@@ -9,7 +9,7 @@ try {
 
 
 const connectDB = async () => {
-  const uri = process.env.MONGO_URI || DIRECT_REPLICA_FALLBACK;
+  const uri = process.env.MONGO_URI || "mongodb://localhost:27017/test";
   try {
     const conn = await mongoose.connect(uri);
     console.log(`MongoDB Connected Successfully ✅ (${conn.connection.host})`);
