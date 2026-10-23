@@ -10,9 +10,9 @@ const EVENT_NAMES = {
 
 // Team size rules (including the leader)
 const TEAM_SIZE_RULES = {
-  model: { min: 1, max: 2 },
-  robo: { min: 1, max: 2 },
-  botRacing: { min: 1, max: 2 },
+  model: { min: 2, max: 4 },
+  robo: { min: 2, max: 4 },
+  botRacing: { min: 2, max: 4 },
 };
 
 // Max teams one IP address may register (all events combined)
@@ -91,8 +91,8 @@ const registerTeam = asyncHandler(async (req, res) => {
       res,
       400,
       eventId === "botRacing"
-        ? "Walking Bot allows a minimum of 1 and maximum of 2 members in the team."
-        : "This event allows a minimum of 1 and maximum of 2 members in the team."
+        ? "Walking Bot allows a minimum of 2 and maximum of 4 members in the team."
+        : "This event allows a minimum of 2 and maximum of 4 members in the team."
     );
   }
 

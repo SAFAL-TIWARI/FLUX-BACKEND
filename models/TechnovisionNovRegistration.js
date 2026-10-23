@@ -68,8 +68,8 @@ const technovisionNovRegistrationSchema = new mongoose.Schema(
     teamSize: {
       type: Number,
       required: [true, "Team size is required"],
-      min: [1, "Team size must be at least 1"],
-      max: [2, "Team size cannot exceed 2"],
+      min: [2, "Team size must be at least 2"],
+      max: [4, "Team size cannot exceed 4"],
     },
     leaderName: {
       type: String,
